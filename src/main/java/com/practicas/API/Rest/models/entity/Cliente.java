@@ -1,20 +1,28 @@
 package com.practicas.API.Rest.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente implements Serializable {
 
 	@Id
@@ -23,8 +31,12 @@ public class Cliente implements Serializable {
 	private String nombre;
 	private String apellido;
 	private String email;
-	
-	@Column(name="create_at")
+
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
+	private List<Factura> facturas;
+
+	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 
@@ -33,7 +45,11 @@ public class Cliente implements Serializable {
 		// TODO Auto-generated method stub
 		createAt = new Date();
 	}
-	
+
+	public Cliente() {
+		facturas = new ArrayList<Factura>();
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -74,6 +90,17 @@ public class Cliente implements Serializable {
 		this.createAt = createAt;
 	}
 
-	
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
+
+	public void addFactura(Factura factura) {
+		facturas.add(factura);
+	}
+
 	private static final long serialVersionUID = 1L;
 }
