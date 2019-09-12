@@ -2,19 +2,28 @@ package com.practicas.API.Rest.models.services;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.practicas.API.Rest.models.entity.Cliente;
+
 import com.practicas.API.Rest.models.repository.IClienteRepository;
+import com.practicas.API.Rest.models.services.dto.ClienteDTO;
+
+import com.practicas.API.Rest.models.services.mapper.ClienteMapper;
 
 @Service
 public class ClienteServiceImpl implements IClienteService {
 
+	private final Logger log = LoggerFactory.getLogger(FacturaServiceImpl.class);
+	
 	@Autowired
 	private IClienteRepository clienteRepository;
 	
+	private ClienteMapper clienteMapper;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -34,9 +43,14 @@ public class ClienteServiceImpl implements IClienteService {
 
 	@Override
 	@Transactional
-	public Cliente save(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return clienteRepository.save(cliente);
+	public ClienteDTO save(ClienteDTO clienteDTO) {
+	
+		log.debug("Request to save Solicitud : {}", clienteDTO);
+
+		Cliente cliente = clienteMapper.toEntity(clienteDTO);
+		cliente = clienteRepository.save(cliente);
+
+		return clienteMapper.toDto(cliente);
 	}
 
 

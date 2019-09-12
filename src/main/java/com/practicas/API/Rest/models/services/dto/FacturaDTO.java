@@ -14,6 +14,8 @@ public class FacturaDTO implements Serializable{
 	private String observacion;
 	private Date createAt;
 	private Long clienteId;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -94,8 +96,6 @@ public class FacturaDTO implements Serializable{
 	@Override
 	public String toString() {
 		return "FacturaDTO [id=" + id + ", descripcion=" + descripcion + ", observacion=" + observacion + ", createAt="
-				+ createAt + ", clienteId=" + clienteId + "]";
+				+ createAt + "]";
 	}
-	
-	
 }

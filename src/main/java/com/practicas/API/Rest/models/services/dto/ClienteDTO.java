@@ -53,4 +53,12 @@ public class ClienteDTO implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
+	@Override
+	public String toString() {
+		return "ClienteDTO [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", createAt=" + createAt + "]";
+	}
+	
+	
 }

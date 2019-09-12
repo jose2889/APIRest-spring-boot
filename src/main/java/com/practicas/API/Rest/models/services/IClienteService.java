@@ -3,6 +3,7 @@ package com.practicas.API.Rest.models.services;
 import java.util.List;
 
 import com.practicas.API.Rest.models.entity.Cliente;
+import com.practicas.API.Rest.models.services.dto.ClienteDTO;
 
 public interface IClienteService {
 	
@@ -10,7 +11,7 @@ public interface IClienteService {
 	
 	public Cliente findById(Long id);
 	
-	public Cliente save(Cliente cliente);
+	public ClienteDTO save(ClienteDTO clienteDTO);
 	
 	public void delete(Long id);
 

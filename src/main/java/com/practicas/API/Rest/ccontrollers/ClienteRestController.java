@@ -2,6 +2,8 @@ package com.practicas.API.Rest.ccontrollers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,13 +17,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.practicas.API.Rest.models.entity.Cliente;
+import com.practicas.API.Rest.models.services.FacturaServiceImpl;
 import com.practicas.API.Rest.models.services.IClienteService;
+import com.practicas.API.Rest.models.services.dto.ClienteDTO;
+import com.practicas.API.Rest.models.services.dto.FacturaDTO;
 
 //@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {
 
+	private final Logger log = LoggerFactory.getLogger(FacturaServiceImpl.class);
+	
 	@Autowired
 	private IClienteService clienteService;
 	
@@ -37,22 +44,21 @@ public class ClienteRestController {
 	
 	@PostMapping("/clientes")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente create(@RequestBody Cliente cliente) {
+	public ClienteDTO create(@RequestBody ClienteDTO clienteDTO) {
 		
-		return clienteService.save(cliente);
+		log.debug("Controller CLIENTE DTO : {}", clienteDTO);
+	
+		return clienteService.save(clienteDTO);
 	}
 	
 	@PutMapping("/clientes/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente update(@RequestBody Cliente cliente, @PathVariable Long id) {
-		Cliente clienteActual = clienteService.findById(id);
+	public ClienteDTO update(@RequestBody ClienteDTO clienteDTO, @PathVariable Long id) {
+	
 		
-		clienteActual.setApellido(cliente.getApellido());
-		clienteActual.setNombre(cliente.getNombre());
-		clienteActual.setEmail(cliente.getEmail());
-		
-		return clienteService.save(clienteActual);
+		return clienteService.save(clienteDTO);
 	}
+	
 	
 	@DeleteMapping("/clientes/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
