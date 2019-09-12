@@ -1,7 +1,11 @@
 package com.practicas.API.Rest.ccontrollers;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
+import com.practicas.API.Rest.models.services.FacturaServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,44 +20,46 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.practicas.API.Rest.models.entity.Factura;
 import com.practicas.API.Rest.models.services.IFacturaService;
+import com.practicas.API.Rest.models.services.dto.FacturaDTO;
+
+import javax.validation.Valid;
+
+import static org.hibernate.id.IdentifierGenerator.ENTITY_NAME;
 
 //@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api")
 public class FacturaRestController {
 
+	private final Logger log = LoggerFactory.getLogger(FacturaRestController.class);
+
 	@Autowired
 	private IFacturaService facturaService;
-	
+
 	@GetMapping("/facturas")
-	public List<Factura> index(){
+	public List<Factura> index() {
 		return facturaService.findAll();
 	}
-	
+
 	@GetMapping("/facturas/{id}")
 	public Factura show(@PathVariable Long id) {
 		return facturaService.findById(id);
 	}
-	
+
 	@PostMapping("/facturas")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Factura create(@RequestBody Factura factura) {
-		
-		return facturaService.save(factura);
+	public FacturaDTO create(@Valid @RequestBody FacturaDTO facturaDTO) throws URISyntaxException {
+		log.debug("Controller Factura DTO : {}", facturaDTO);
+		return facturaService.save(facturaDTO);
 	}
-	
+
 	@PutMapping("/facturas/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Factura update(@RequestBody Factura factura, @PathVariable Long id) {
-		Factura facturaActual = facturaService.findById(id);
-		
-		facturaActual.setDescripcion(factura.getDescripcion());
-		facturaActual.setObservacion(factura.getObservacion());
-		facturaActual.setCliente(factura.getCliente());
-		
-		return facturaService.save(facturaActual);
+	public FacturaDTO update(@RequestBody FacturaDTO facturaDTO, @PathVariable Long id) {
+
+		return facturaService.save(facturaDTO);
 	}
-	
+
 	@DeleteMapping("/facturas/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void detele(@PathVariable Long id) {
