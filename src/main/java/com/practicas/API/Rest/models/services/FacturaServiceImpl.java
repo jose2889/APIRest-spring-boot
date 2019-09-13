@@ -22,6 +22,7 @@ public class FacturaServiceImpl implements IFacturaService {
 	@Autowired
 	private IFacturaRepository facturaRepository;
 
+	@Autowired
 	private FacturaMapper facturaMapper;
 
 	@Override

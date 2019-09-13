@@ -23,6 +23,7 @@ public class ClienteServiceImpl implements IClienteService {
 	@Autowired
 	private IClienteRepository clienteRepository;
 	
+	@Autowired
 	private ClienteMapper clienteMapper;
 	
 	@Override
