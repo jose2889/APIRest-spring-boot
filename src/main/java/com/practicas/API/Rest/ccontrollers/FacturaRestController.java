@@ -3,7 +3,7 @@ package com.practicas.API.Rest.ccontrollers;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.practicas.API.Rest.models.services.FacturaServiceImpl;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ import com.practicas.API.Rest.models.services.dto.FacturaDTO;
 
 import javax.validation.Valid;
 
-import static org.hibernate.id.IdentifierGenerator.ENTITY_NAME;
 
 //@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController

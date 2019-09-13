@@ -20,7 +20,6 @@ import com.practicas.API.Rest.models.entity.Cliente;
 import com.practicas.API.Rest.models.services.FacturaServiceImpl;
 import com.practicas.API.Rest.models.services.IClienteService;
 import com.practicas.API.Rest.models.services.dto.ClienteDTO;
-import com.practicas.API.Rest.models.services.dto.FacturaDTO;
 
 //@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
