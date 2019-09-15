@@ -1,6 +1,5 @@
 package com.practicas.API.Rest.models.services.mapper;
 
-import java.util.List;
 
 /**
  * Contract for a generic dto to entity mapper.
