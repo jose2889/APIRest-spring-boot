@@ -15,7 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "facturas")
 public class Factura implements Serializable {
@@ -35,50 +37,10 @@ public class Factura implements Serializable {
 		// TODO Auto-generated method stub
 		createAt = new Date();
 	}
-	
+
 	@ManyToOne
-    @JsonIgnoreProperties("")
+	@JsonIgnoreProperties("")
 	private Cliente cliente;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getObservacion() {
-		return observacion;
-	}
-
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 
 	private static final long serialVersionUID = 1L;
 
